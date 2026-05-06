@@ -9,13 +9,3 @@ def ft_seed_inventory(seed_type: str, quantity: int, unit: str) -> None:
         print(f"{seed_name} seeds: covers {quantity} square meters")
     else:
         print("Unknown unit type")
-
-def main():
-    ft_seed_inventory("tomato", 15, "packets")
-    ft_seed_inventory("carrot", 8, "grams")
-    ft_seed_inventory("lettuce", 12, "area")
-    ft_seed_inventory("onion", 5, "box")
-
-
-if __name__ == "__main__":
-    main()
