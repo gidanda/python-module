@@ -1,4 +1,10 @@
 class Plant:
+    def __init__(self) -> None:
+        self.name = ""
+        self.height = 0.0
+        self.days = 0
+        self.growth_rate = 0.0
+
     def show(self) -> None:
         print(f"{self.name}: {round(self.height, 1)}cm, {self.days} days old")
 
