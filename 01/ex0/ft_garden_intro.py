@@ -1,4 +1,4 @@
-def main():
+def main() -> None:
     name = "Rose"
     height = 25
     age = 30

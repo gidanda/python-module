@@ -1,5 +1,5 @@
 class Plant:
-    def show(self):
+    def show(self) -> None:
         print(f"{self.name}: {self.height}cm, {self.age} days old")
 
 plants_data = [
@@ -8,7 +8,7 @@ plants_data = [
     {"name": "Cactus", "height": 15, "age": 120},
 ]
 
-def main():
+def main() -> None:
     print("=== Garden Plant Registry ===")
 
     for data in plants_data:
