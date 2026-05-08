@@ -12,7 +12,7 @@ players = [
     "Liam",
 ]
 
-def main():
+def main() -> None:
     print("=== Game Data Alchemist ===\n")
 
     capitalized_players = [name.capitalize() for name in players]

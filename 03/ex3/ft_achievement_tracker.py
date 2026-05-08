@@ -17,12 +17,12 @@ ACHIEVEMENTS = [
         "Hidden Path Finder",
     ]
 
-def gen_player_achievements():
+def gen_player_achievements() -> set[str]:
     count = random.randint(4, 8)
     selected = random.sample(ACHIEVEMENTS, count)
     return set(selected)
 
-def main():
+def main() -> None:
     print("=== Achievement Tracker System ===\n")
 
     alice = gen_player_achievements()

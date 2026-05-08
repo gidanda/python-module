@@ -1,7 +1,7 @@
 import sys
 
-def parse_inventory(args):
-    inventory = {}
+def parse_inventory(args: list[str]) -> dict[str, int]:
+    inventory: dict[str, int] = {}
     
     for arg in args:
         parts = arg.split(":")
@@ -29,7 +29,7 @@ def parse_inventory(args):
 
 
 
-def main():
+def main() -> None:
     print("=== Inventory System Analysis ===")
     inventory = parse_inventory(sys.argv[1:])
     print(f"Got inventory: {inventory}")

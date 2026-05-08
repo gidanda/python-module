@@ -1,6 +1,6 @@
 import sys
 
-def main():
+def main() -> None:
     print("=== Command Quest ===")
     print(f"Program name: {sys.argv[0]}")
     print(f"Arguments received: {len(sys.argv) - 1}")
