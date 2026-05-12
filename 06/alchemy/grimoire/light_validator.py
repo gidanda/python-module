@@ -1,4 +1,9 @@
 def validate_ingredients(ingredients: str):
-    text = 
-    for ingredient in ingredients:
-        if ingredient in text
+    allowed = ["earth", "air", "fire", "water"]
+    lowered = ingredients.lower()
+
+    for item in allowed:
+        if item in lowered:
+            return f"{ingredients} - VALID"
+        
+    return f"{ingredients} - INVALID"
