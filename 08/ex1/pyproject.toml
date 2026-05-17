@@ -1,12 +1,15 @@
 [project]
 name = "loading"
 version = "0.1.0"
-description = "Matrix data analysis with dependency management"
+description = "dependency management"
 authors = [
-    {name = "hiroki goda",email = "hiroz000qop@gmail.com"}
+    {name = "ごうだひろき",email = "hiroz000qop@gmail.com"}
 ]
 requires-python = ">=3.10"
 dependencies = [
+    "numpy (>=2.2,<2.3)",
+    "pandas (>=2.2,<3)",
+    "matplotlib (>=3.10.9,<4.0.0)"
 ]
 
 
