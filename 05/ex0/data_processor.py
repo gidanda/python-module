@@ -1,16 +1,9 @@
-from typing import Any, TypeAlias
+from typing import Any
 from abc import ABC, abstractmethod
-
-NumericData: TypeAlias = int | float | list[int | float]
-TextData: TypeAlias = str | list[str]
-LogEntry: TypeAlias = dict[str, str]
-LogData: TypeAlias = LogEntry | list[LogEntry]
-StoredItem: TypeAlias = tuple[int, str]
-
 
 class DataProcessor(ABC):
     def __init__(self) -> None:
-        self._data: list[StoredItem] = []
+        self._data: list[tuple[int, str]] = []
         self._rank = 0
 
     @abstractmethod
@@ -21,7 +14,7 @@ class DataProcessor(ABC):
     def ingest(self, data: Any) -> None:
         pass
 
-    def output(self) -> StoredItem:
+    def output(self) -> tuple[int, str]:
         return self._data.pop(0)
     
     def _store(self, value: str) -> None:
@@ -36,7 +29,7 @@ class NumericProcessor(DataProcessor):
             return all(isinstance(item, (int, float)) for item in data)
         return False    
 
-    def ingest(self, data: NumericData) -> None:
+    def ingest(self, data: int | float | list[int | float]) -> None:
         if not self.validate(data):
             raise ValueError("Improper numeric data")
         
@@ -54,7 +47,7 @@ class TextProcessor(DataProcessor):
             return all(isinstance(item, str) for item in data)
         return False
     
-    def ingest(self, data: TextData) -> None:
+    def ingest(self, data: str | list[str]) -> None:
         if not self.validate(data):
             raise ValueError("Improper text data")
         
@@ -85,7 +78,7 @@ class LogProcessor(DataProcessor):
 
         return False
 
-    def ingest(self, data: LogData) -> None:
+    def ingest(self, data: dict[str, str] | list[dict[str, str]]) -> None:
         if not self.validate(data):
             raise ValueError("Improper log data")
         
