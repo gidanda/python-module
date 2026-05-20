@@ -1,35 +1,42 @@
-from typing import Any
+from typing import Any, TypeAlias
 from abc import ABC, abstractmethod
 
+NumericData: TypeAlias = int | float | list[int | float]
+TextData: TypeAlias = str | list[str]
+LogEntry: TypeAlias = dict[str, str]
+LogData: TypeAlias = LogEntry | list[LogEntry]
+StoredItem: TypeAlias = tuple[int, str]
+
+
 class DataProcessor(ABC):
-    def __init__(self):
-        self._data = []
+    def __init__(self) -> None:
+        self._data: list[StoredItem] = []
         self._rank = 0
 
     @abstractmethod
-    def validate(self, data: Any):
+    def validate(self, data: Any) -> bool:
         pass
 
     @abstractmethod
-    def ingest(self, data: Any):
+    def ingest(self, data: Any) -> None:
         pass
 
-    def output(self):
+    def output(self) -> StoredItem:
         return self._data.pop(0)
     
-    def _store(self, value):
+    def _store(self, value: str) -> None:
         self._data.append((self._rank, value))
         self._rank += 1
 
 class NumericProcessor(DataProcessor):
-    def validate(self, data: Any):
+    def validate(self, data: Any) -> bool:
         if isinstance(data, (int, float)):
             return True
         if isinstance(data, list):
             return all(isinstance(item, (int, float)) for item in data)
         return False    
 
-    def ingest(self, data):
+    def ingest(self, data: NumericData) -> None:
         if not self.validate(data):
             raise ValueError("Improper numeric data")
         
@@ -47,7 +54,7 @@ class TextProcessor(DataProcessor):
             return all(isinstance(item, str) for item in data)
         return False
     
-    def ingest(self, data: str | list[str]) -> None:
+    def ingest(self, data: TextData) -> None:
         if not self.validate(data):
             raise ValueError("Improper text data")
         
@@ -78,7 +85,7 @@ class LogProcessor(DataProcessor):
 
         return False
 
-    def ingest(self, data: dict[str, str] | list[dict[str, str]]) -> None:
+    def ingest(self, data: LogData) -> None:
         if not self.validate(data):
             raise ValueError("Improper log data")
         
