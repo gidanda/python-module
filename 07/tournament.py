@@ -1,13 +1,16 @@
 from ex0 import AquaFactory, FlameFactory
+from ex0.factory import CreatureFactory
 from ex1 import HealingCreatureFactory, TransformCreatureFactory
 from ex2 import (
     AggressiveStrategy,
+    BattleStrategy,
     BattleStrategyError,
     DefensiveStrategy,
     NormalStrategy,
 )
 
-def battle(opponents):
+
+def battle(opponents: list[tuple[CreatureFactory, BattleStrategy]]) -> None:
     print("*** Tournament ***")
     print(f"{len(opponents)} opponents involved")
 
@@ -53,6 +56,8 @@ if __name__ == "__main__":
     print()
     print("Tournament 2 (multiple)")
     print("[ (Aquabub+Normal), (Healing+Defensive), (Transform+Aggressive) ]")
-    battle([(aqua_factory, normal_strategy),
-            (healing_factory, defensive_strategy),
-            (transforming_factory, aggressive_strategy)])
+    battle([
+        (aqua_factory, normal_strategy),
+        (healing_factory, defensive_strategy),
+        (transforming_factory, aggressive_strategy),
+    ])
