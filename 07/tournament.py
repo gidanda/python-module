@@ -22,9 +22,9 @@ def battle(opponents):
             print()
             print("* Battle *")
             print(creature1.describe())
-            print(" vs.")
+            print("vs.")
             print(creature2.describe())
-            print(" now fight!")
+            print("now fight!")
             try:
                 strategy1.act(creature1)
                 strategy2.act(creature2)
