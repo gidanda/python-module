@@ -26,9 +26,9 @@ def test_transform_factory(factory):
     evolved = factory.create_evolved()
     print(evolved.describe())
     print(evolved.attack())
-    print(base.transform())
-    print(base.attack())
-    print(base.revert())
+    print(evolved.transform())
+    print(evolved.attack())
+    print(evolved.revert())
     
 if __name__ == "__main__":
     healing_factory = HealingCreatureFactory()
