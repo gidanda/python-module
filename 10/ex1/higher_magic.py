@@ -1,5 +1,5 @@
 def spell_combiner(spell1: Callable, spell2: Callable) -> Callable:
-
+    return tuple(spell1(), spell2())
 
 def power_amplifier(base_spell: Callable, multiplier: int) -> Callable:
 
