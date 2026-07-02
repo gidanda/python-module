@@ -1,12 +1,14 @@
 from datetime import datetime
+
 from pydantic import BaseModel, Field, ValidationError
 
+
 class SpaceStation(BaseModel):
-    station_id: str = Field(..., max_length=10, min_length=3)
-    name: str = Field(..., max_length=50, min_length=1)
-    crew_size: int = Field(le=20, ge=1)
-    power_level: float  = Field(le=100.0, ge=0.0)
-    oxygen_level: float = Field(le=100.0, ge=0.0)
+    station_id: str = Field(..., min_length=3, max_length=10)
+    name: str = Field(..., min_length=1, max_length=50)
+    crew_size: int = Field(..., ge=1, le=20)
+    power_level: float = Field(..., ge=0.0, le=100.0)
+    oxygen_level: float = Field(..., ge=0.0, le=100.0)
     last_maintenance: datetime
     is_operational: bool = True
     notes: str | None = Field(default=None, max_length=200)
@@ -14,7 +16,7 @@ class SpaceStation(BaseModel):
 
 def main() -> None:
     print("Space Station Data Validation")
-    print("========================================")
+    print("=" * 40)
 
     station = SpaceStation(
         station_id="ISS001",
@@ -25,20 +27,18 @@ def main() -> None:
         last_maintenance="2026-05-22T10:00:00",
     )
 
+    status = "Operational" if station.is_operational else "Not operational"
+
     print("Valid station created:")
     print(f"ID: {station.station_id}")
     print(f"Name: {station.name}")
     print(f"Crew: {station.crew_size} people")
     print(f"Power: {station.power_level}%")
     print(f"Oxygen: {station.oxygen_level}%")
-
-    if station.is_operational:
-        print("Status: Operational")
-    else:
-        print("Status: Not operational")
+    print(f"Status: {status}")
 
     print()
-    print("========================================")
+    print("=" * 40)
 
     try:
         SpaceStation(
@@ -52,6 +52,7 @@ def main() -> None:
     except ValidationError as error:
         print("Expected validation error:")
         print(error.errors()[0]["msg"])
+
 
 if __name__ == "__main__":
     main()
