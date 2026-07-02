@@ -11,4 +11,13 @@ def spell_transformer(spells: list[str]) -> list[str]:
 
 
 def mage_stats(mages: list[dict]) -> dict:
-    return dict()
+    powers = list(map(lambda mage: mage["power"], mages))
+
+    return {
+        "max_power": max(powers),
+        "min_power": min(powers),
+        "avg_power": round(sum(powers) / len(powers), 2),
+    }
+
+
+def main()
